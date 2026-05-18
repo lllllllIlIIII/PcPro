@@ -1,0 +1,1739 @@
+index pour test : 
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowUp — PC Premium Sur Mesure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white:      #ffffff;
+            --black:      #0a0a0a;
+            --gray-50:    #fafaf9;
+            --gray-100:   #f4f3f0;
+            --gray-200:   #e8e7e3;
+            --gray-300:   #d0cfc9;
+            --gray-400:   #9a9892;
+            --gray-600:   #5c5b57;
+            --gray-800:   #2a2a28;
+            --gold:       #c4a96d;
+            --gold-light: #e8c98a;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans:  'DM Sans', sans-serif;
+            --transition: 0.25s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        button { cursor: pointer; font-family: var(--font-sans); }
+        img { display: block; max-width: 100%; }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.4rem 5rem;
+            background: rgba(255, 255, 255, 0.93);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--gray-200);
+            transition: padding var(--transition), box-shadow var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 1rem 5rem;
+            box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.65rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--black);
+        }
+
+        .nav-logo span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            gap: 2.8rem;
+        }
+
+        .nav-links a {
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gray-600);
+            position: relative;
+            transition: color var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: 0; right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--black); }
+        .nav-links a:hover::after { transform: scaleX(1); }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .nav-icon-btn {
+            background: none;
+            border: none;
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        .nav-icon-btn:hover {
+            background: var(--gray-100);
+            color: var(--black);
+        }
+
+        .nav-cta {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 0.7rem 1.8rem;
+            background: var(--black);
+            color: var(--white);
+            border: 1px solid var(--black);
+            transition: background var(--transition), color var(--transition), transform 0.15s;
+        }
+
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--black);
+        }
+
+        .nav-cta:active { transform: scale(0.97); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding-top: 80px;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6rem 3.5rem 6rem 5rem;
+        }
+
+        .eyebrow {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.2s forwards;
+        }
+
+        .eyebrow::before {
+            content: '';
+            display: block;
+            width: 32px; height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 300;
+            line-height: 1.06;
+            letter-spacing: -0.01em;
+            color: var(--black);
+            margin-bottom: 1.8rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.35s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--gray-600);
+            max-width: 420px;
+            margin-bottom: 2.8rem;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.5s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.4rem;
+            align-items: center;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.65s forwards;
+        }
+
+        .btn-primary {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 1rem 2.4rem;
+            background: var(--black);
+            color: var(--white);
+            border: 1px solid var(--black);
+            display: inline-block;
+            transition: background var(--transition), color var(--transition), transform 0.15s;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--black);
+        }
+
+        .btn-primary:active { transform: scale(0.97); }
+
+        .btn-ghost {
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gray-600);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color var(--transition), gap var(--transition);
+        }
+
+        .btn-ghost:hover { color: var(--black); gap: 0.9rem; }
+        .btn-ghost::after { content: '→'; }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--gray-200);
+            opacity: 0;
+            animation: fadeUp 0.8s 0.8s forwards;
+        }
+
+        .stat-num {
+            font-family: var(--font-serif);
+            font-size: 2.1rem;
+            font-weight: 500;
+            color: var(--black);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 0.4rem;
+        }
+
+        /* HERO RIGHT */
+        .hero-right {
+            background: var(--gray-50);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-right::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                    radial-gradient(ellipse at 30% 60%, rgba(196,169,109,0.08) 0%, transparent 55%),
+                    radial-gradient(ellipse at 80% 20%, rgba(196,169,109,0.05) 0%, transparent 45%);
+            pointer-events: none;
+        }
+
+        /* Floating spec badges */
+        .spec-badge {
+            position: absolute;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 4px;
+            padding: 0.55rem 1rem;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--gray-600);
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .spec-badge strong { color: var(--black); font-weight: 500; }
+        .spec-badge span   { color: var(--gold); }
+
+        .badge-1 { top: 18%; right: 8%;  animation: float 4.5s 0.0s ease-in-out infinite; }
+        .badge-2 { top: 42%; left: 5%;  animation: float 4.5s 0.8s ease-in-out infinite; }
+        .badge-3 { bottom: 22%; right: 12%; animation: float 4.5s 1.5s ease-in-out infinite; }
+        .badge-4 { bottom: 14%; left: 10%; animation: float 4.5s 0.4s ease-in-out infinite; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-8px); }
+        }
+
+        /* PC tower illustration (CSS only) */
+        .pc-wrap {
+            position: relative;
+            width: 220px;
+            animation: fadeUp 1s 0.3s both;
+        }
+
+        .pc-tower {
+            width: 200px;
+            height: 360px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            padding: 18px 14px 14px;
+            gap: 12px;
+            box-shadow:
+                    20px 32px 64px rgba(0,0,0,0.07),
+                    4px 8px 20px rgba(0,0,0,0.04);
+            margin: 0 auto;
+        }
+
+        .pc-dots { display: flex; gap: 6px; }
+        .pc-dot  { width: 8px; height: 8px; border-radius: 50%; background: var(--gray-200); }
+        .pc-dot.gold { background: var(--gold); }
+
+        .pc-body {
+            flex: 1;
+            background: var(--gray-100);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 12px;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pc-fan {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            border: 2px solid var(--gray-300);
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            animation: spin 9s linear infinite;
+        }
+
+        .pc-fan::before {
+            content: '';
+            position: absolute;
+            width: 46%; height: 46%;
+            border-radius: 50% 0;
+            background: var(--gray-300);
+            top: 50%; left: 50%;
+            transform-origin: top left;
+        }
+
+        .pc-fan-center {
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: var(--gray-400);
+            z-index: 1;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .pc-bars { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+        .pc-bar  { height: 7px; border-radius: 2px; background: var(--gray-200); }
+        .pc-bar.full  { width: 100%; }
+        .pc-bar.three-q { width: 75%; }
+        .pc-bar.half  { width: 55%; }
+        .pc-bar.gold  { background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%); }
+
+        .pc-led {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            animation: ledPulse 2.8s ease-in-out infinite;
+        }
+
+        @keyframes ledPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+        .pc-footer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pc-power {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            border: 1.5px solid var(--gray-200);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; color: var(--gray-400);
+        }
+
+        .pc-usb {
+            height: 10px;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: 2px;
+            flex: 1;
+        }
+
+        /* ===== MARQUEE STRIP ===== */
+        .marquee-strip {
+            overflow: hidden;
+            background: var(--black);
+            padding: 0.9rem 0;
+            display: flex;
+        }
+
+        .marquee-track {
+            display: flex;
+            white-space: nowrap;
+            animation: marquee 26s linear infinite;
+        }
+
+        @keyframes marquee { to { transform: translateX(-50%); } }
+
+        .marquee-item {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            padding: 0 2.8rem;
+        }
+
+        .marquee-item.sep { color: var(--gold); padding: 0; }
+
+        /* ===== SECTION HEADER PATTERN ===== */
+        .section-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .section-eyebrow::before {
+            content: '';
+            display: block;
+            width: 24px; height: 1px;
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--black);
+        }
+
+        .section-title em { font-style: italic; color: var(--gold); }
+
+        /* ===== PRODUCTS ===== */
+        .products {
+            padding: 8rem 5rem;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+        }
+
+        .link-arrow {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gray-600);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            padding-bottom: 0.2rem;
+            transition: color var(--transition), gap var(--transition), border-color var(--transition);
+        }
+
+        .link-arrow:hover { color: var(--black); gap: 0.9rem; border-color: var(--black); }
+        .link-arrow::after { content: '→'; }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.5rem 1.2rem;
+            background: transparent;
+            border: 1px solid var(--gray-200);
+            color: var(--gray-600);
+            transition: all var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--black);
+            border-color: var(--black);
+            color: var(--white);
+        }
+
+        /* Product grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .product-card {
+            background: var(--gray-50);
+            padding: 2.5rem 2rem 2rem;
+            position: relative;
+            cursor: pointer;
+            transition: background var(--transition);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover { background: var(--gray-100); }
+
+        .product-card.featured {
+            background: var(--gray-100);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s ease;
+        }
+
+        .product-card:hover::before { transform: scaleX(1); }
+
+        .product-badge {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .product-badge.bestseller { color: #b8860b; }
+
+        /* Mini PC tower illustration */
+        .product-visual {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .mini-pc {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 10px;
+            gap: 8px;
+            box-shadow: 6px 10px 28px rgba(0,0,0,0.06);
+            position: relative;
+        }
+
+        .mini-pc::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .mini-fan {
+            border-radius: 50%;
+            border: 1.5px solid var(--gray-300);
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            animation: spin 7s linear infinite;
+        }
+
+        .mini-fan-dot { border-radius: 50%; background: var(--gray-400); }
+
+        .mini-bars { display: flex; flex-direction: column; gap: 5px; width: 100%; }
+        .mini-bar  { height: 5px; border-radius: 1px; background: var(--gray-200); }
+        .mini-bar.g { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+
+        .product-name {
+            font-family: var(--font-serif);
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: var(--black);
+            line-height: 1.15;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-specs {
+            font-size: 0.78rem;
+            color: var(--gray-400);
+            letter-spacing: 0.03em;
+            line-height: 1.7;
+            margin-bottom: 1.8rem;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--black);
+        }
+
+        .product-price small {
+            font-family: var(--font-sans);
+            font-size: 0.68rem;
+            color: var(--gray-400);
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            margin-left: 3px;
+        }
+
+        .product-add {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--gray-200);
+            background: transparent;
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            display: flex; align-items: center; justify-content: center;
+            transition: all var(--transition);
+        }
+
+        .product-add:hover {
+            background: var(--black);
+            border-color: var(--black);
+            color: var(--white);
+        }
+
+        /* ===== CONFIGURATEUR ===== */
+        .configurateur {
+            padding: 8rem 5rem;
+            background: var(--black);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .config-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .config-eyebrow::before {
+            content: '';
+            display: block;
+            width: 24px; height: 1px;
+            background: var(--gold);
+        }
+
+        .config-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.4rem, 4vw, 3.6rem);
+            font-weight: 300;
+            line-height: 1.08;
+            color: var(--white);
+            margin-bottom: 1.4rem;
+        }
+
+        .config-title em { font-style: italic; color: var(--gold); }
+
+        .config-desc {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: rgba(255,255,255,0.4);
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            max-width: 440px;
+        }
+
+        .btn-outline-light {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 1rem 2.4rem;
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.22);
+            display: inline-block;
+            transition: all var(--transition);
+        }
+
+        .btn-outline-light:hover {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        /* Config steps */
+        .config-steps { display: flex; flex-direction: column; gap: 0.75rem; }
+
+        .config-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        .config-step:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.12);
+        }
+
+        .config-step.active {
+            border-color: rgba(196,169,109,0.4);
+            background: rgba(196,169,109,0.05);
+        }
+
+        .step-icon {
+            width: 38px; height: 38px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+        }
+
+        .step-info { flex: 1; }
+
+        .step-name {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 2px;
+        }
+
+        .step-val {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.32);
+            letter-spacing: 0.04em;
+        }
+
+        .step-price {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--gold);
+        }
+
+        .config-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.25rem;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            margin-top: 0.25rem;
+        }
+
+        .total-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .total-price {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--gold);
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            padding: 8rem 5rem;
+            background: var(--gray-50);
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            border: 1px solid var(--gray-200);
+        }
+
+        .feature-item {
+            padding: 2.5rem 2rem;
+            border-right: 1px solid var(--gray-200);
+            transition: background var(--transition);
+        }
+
+        .feature-item:last-child { border-right: none; }
+        .feature-item:hover { background: var(--white); }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--gold);
+        }
+
+        .feature-name {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--black);
+            margin-bottom: 0.6rem;
+        }
+
+        .feature-desc {
+            font-size: 0.82rem;
+            line-height: 1.75;
+            color: var(--gray-600);
+            font-weight: 300;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 8rem 5rem;
+        }
+
+        .testimonials-header {
+            margin-bottom: 4rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .testi-card {
+            background: var(--gray-50);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            transition: background var(--transition);
+        }
+
+        .testi-card:hover { background: var(--gray-100); }
+
+        .testi-stars {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        .testi-text {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.7;
+            color: var(--black);
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            margin-top: auto;
+        }
+
+        .testi-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            flex-shrink: 0;
+        }
+
+        .testi-name {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--black);
+        }
+
+        .testi-since {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            letter-spacing: 0.05em;
+            margin-top: 1px;
+        }
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter {
+            padding: 6rem 5rem;
+            background: var(--black);
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 300;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-title em { font-style: italic; color: var(--gold); }
+
+        .newsletter-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.9rem 1.4rem;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-right: none;
+            color: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color var(--transition);
+        }
+
+        .newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
+        .newsletter-input:focus { border-color: rgba(196,169,109,0.4); }
+
+        .newsletter-btn {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 0.9rem 1.8rem;
+            background: var(--gold);
+            color: var(--black);
+            border: 1px solid var(--gold);
+            transition: background var(--transition), color var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--gray-800);
+            padding: 5rem 5rem 2.5rem;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-brand p {
+            font-size: 1.6rem;
+            font-family: var(--font-serif);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p span { color: var(--gold); }
+
+        .footer-brand small {
+            font-size: 0.82rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.35);
+            font-weight: 300;
+            display: block;
+            max-width: 260px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1.4rem;
+        }
+
+        .footer-col ul { display: flex; flex-direction: column; gap: 0.75rem; }
+
+        .footer-col ul a {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.35);
+            transition: color var(--transition);
+        }
+
+        .footer-col ul a:hover { color: var(--white); }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-bottom p {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.04em;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 36px; height: 36px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.35);
+            transition: all var(--transition);
+        }
+
+        .social-link:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll reveal (JS-driven) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            nav { padding: 1.2rem 2.5rem; }
+            .hero-left { padding: 4rem 2.5rem 4rem 2.5rem; }
+            .products, .configurateur, .features, .testimonials,
+            .newsletter, footer { padding-left: 2.5rem; padding-right: 2.5rem; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+        }
+
+        @media (max-width: 860px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { grid-template-columns: 1fr; }
+            .hero-right { display: none; }
+            .hero-left { padding: 3rem 1.5rem; }
+            .products { padding: 4rem 1.5rem; }
+            .products-grid { grid-template-columns: 1fr; }
+            .configurateur { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+            .features { padding: 4rem 1.5rem; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
+            .testimonials { padding: 4rem 1.5rem; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .newsletter { padding: 4rem 1.5rem; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-input { border-right: 1px solid rgba(255,255,255,0.12); }
+            footer { padding: 3rem 1.5rem 1.5rem; }
+            .footer-top { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="nav">
+    <a href="#" class="nav-logo">Flow<span>Up</span></a>
+    <ul class="nav-links">
+        <li><a href="#produits">Configurations</a></li>
+        <li><a href="#configurateur">Sur Mesure</a></li>
+        <li><a href="#">Composants</a></li>
+        <li><a href="#">À Propos</a></li>
+        <li><a href="#">Support</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button class="nav-icon-btn" title="Favoris">&#9825;</button>
+        <button class="nav-icon-btn" title="Panier">&#128722;</button>
+        <button class="nav-cta" onclick="window.location.href='#configurateur'">Configurer mon PC</button>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-left">
+        <p class="eyebrow">PC Premium · Assemblé en France</p>
+        <h1 class="hero-title">
+            La puissance,<br>
+            <em>sculptée</em><br>
+            à votre image.
+        </h1>
+        <p class="hero-desc">
+            FlowUp conçoit des PC de bureau d'exception — pré-montés ou entièrement sur mesure. Chaque machine est assemblée à la main, testée rigoureusement, et livrée prête à tout affronter.
+        </p>
+        <div class="hero-buttons">
+            <a href="#produits" class="btn-primary">Voir les configurations</a>
+            <a href="#configurateur" class="btn-ghost">Configurer mon PC</a>
+        </div>
+        <div class="hero-stats">
+            <div>
+                <div class="stat-num">4 800<span style="color:var(--gold)">+</span></div>
+                <div class="stat-label">Machines livrées</div>
+            </div>
+            <div>
+                <div class="stat-num">98<span style="color:var(--gold)">%</span></div>
+                <div class="stat-label">Clients satisfaits</div>
+            </div>
+            <div>
+                <div class="stat-num">3 <span style="font-size:1.2rem; font-weight:300">ans</span></div>
+                <div class="stat-label">Garantie incluse</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-right">
+        <!-- Spec badges -->
+        <div class="spec-badge badge-1"><strong>RTX 4090</strong> <span>·</span> 24 Go VRAM</div>
+        <div class="spec-badge badge-2"><strong>i9-14900K</strong> <span>·</span> 24 cœurs</div>
+        <div class="spec-badge badge-3"><strong>64 Go</strong> DDR5 6400 MHz</div>
+        <div class="spec-badge badge-4"><strong>4 To</strong> NVMe Gen5</div>
+
+        <!-- CSS PC Tower -->
+        <div class="pc-wrap">
+            <div class="pc-tower">
+                <div class="pc-dots">
+                    <div class="pc-dot gold"></div>
+                    <div class="pc-dot"></div>
+                    <div class="pc-dot"></div>
+                </div>
+                <div class="pc-body">
+                    <div class="pc-fan">
+                        <div class="pc-fan-center"></div>
+                    </div>
+                    <div class="pc-bars">
+                        <div class="pc-bar full gold"></div>
+                        <div class="pc-bar three-q"></div>
+                        <div class="pc-bar full"></div>
+                        <div class="pc-bar half"></div>
+                        <div class="pc-bar three-q"></div>
+                    </div>
+                    <div class="pc-led"></div>
+                </div>
+                <div class="pc-footer">
+                    <div class="pc-power">⏻</div>
+                    <div class="pc-usb"></div>
+                    <div class="pc-usb"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee-strip">
+    <div class="marquee-track">
+        <span class="marquee-item">Intel · AMD Ryzen</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">RTX 4090 · RX 7900 XTX</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">DDR5 64 Go</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">NVMe Gen5 · PCIe 5.0</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">Refroidissement Liquide AIO</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">Garantie 3 ans pièces &amp; main d'œuvre</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">Livraison assurée 48h</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">Intel · AMD Ryzen</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">RTX 4090 · RX 7900 XTX</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">DDR5 64 Go</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">NVMe Gen5 · PCIe 5.0</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">Refroidissement Liquide AIO</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">Garantie 3 ans pièces &amp; main d'œuvre</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+        <span class="marquee-item">Livraison assurée 48h</span><span class="marquee-item sep">&nbsp;·&nbsp;</span>
+    </div>
+</div>
+
+<!-- ===== PRODUITS ===== -->
+<section class="products reveal" id="produits">
+    <div class="products-header">
+        <div>
+            <p class="section-eyebrow">Sélection</p>
+            <h2 class="section-title">Nos <em>configurations</em> phares</h2>
+        </div>
+        <a href="#" class="link-arrow">Voir tout le catalogue</a>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterProducts(event, 'tous')">Tous</button>
+        <button class="filter-btn" onclick="filterProducts(event, 'gaming')">Gaming</button>
+        <button class="filter-btn" onclick="filterProducts(event, 'creation')">Création</button>
+        <button class="filter-btn" onclick="filterProducts(event, 'workstation')">Workstation</button>
+    </div>
+
+    <div class="products-grid" id="products-grid">
+
+        <!-- Carte 1 -->
+        <div class="product-card" data-category="gaming">
+            <div class="product-badge">● Essentiel</div>
+            <div class="product-visual">
+                <div class="mini-pc" style="width:72px; height:128px;">
+                    <div class="mini-fan" style="width:38px; height:38px;">
+                        <div class="mini-fan-dot" style="width:8px; height:8px;"></div>
+                    </div>
+                    <div class="mini-bars" style="width:52px;">
+                        <div class="mini-bar g"></div>
+                        <div class="mini-bar" style="width:70%"></div>
+                        <div class="mini-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-name">FlowUp<br>Origin</div>
+            <div class="product-specs">
+                Intel Core i5-14600K · RTX 4060<br>
+                16 Go DDR5 · 1 To NVMe
+            </div>
+            <div class="product-footer">
+                <div class="product-price">1 299 €<small>TTC</small></div>
+                <button class="product-add" title="Ajouter au panier">+</button>
+            </div>
+        </div>
+
+        <!-- Carte 2 (Best-seller) -->
+        <div class="product-card featured" data-category="gaming">
+            <div class="product-badge bestseller">★ Best-seller</div>
+            <div class="product-visual">
+                <div class="mini-pc" style="width:84px; height:150px;">
+                    <div class="mini-fan" style="width:44px; height:44px;">
+                        <div class="mini-fan-dot" style="width:10px; height:10px;"></div>
+                    </div>
+                    <div class="mini-fan" style="width:32px; height:32px; animation-delay:0.4s; margin-top:-4px;">
+                        <div class="mini-fan-dot" style="width:7px; height:7px;"></div>
+                    </div>
+                    <div class="mini-bars" style="width:64px;">
+                        <div class="mini-bar g"></div>
+                        <div class="mini-bar g" style="width:75%"></div>
+                        <div class="mini-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-name">FlowUp<br>Pro X</div>
+            <div class="product-specs">
+                Intel Core i7-14700K · RTX 4070 Ti<br>
+                32 Go DDR5 · 2 To NVMe
+            </div>
+            <div class="product-footer">
+                <div class="product-price">2 099 €<small>TTC</small></div>
+                <button class="product-add" title="Ajouter au panier">+</button>
+            </div>
+        </div>
+
+        <!-- Carte 3 -->
+        <div class="product-card" data-category="workstation">
+            <div class="product-badge">◆ Extrême</div>
+            <div class="product-visual">
+                <div class="mini-pc" style="width:96px; height:172px;">
+                    <div class="mini-fan" style="width:48px; height:48px;">
+                        <div class="mini-fan-dot" style="width:11px; height:11px;"></div>
+                    </div>
+                    <div class="mini-fan" style="width:36px; height:36px; animation-delay:0.6s;">
+                        <div class="mini-fan-dot" style="width:8px; height:8px;"></div>
+                    </div>
+                    <div class="mini-bars" style="width:72px;">
+                        <div class="mini-bar g"></div>
+                        <div class="mini-bar g"></div>
+                        <div class="mini-bar g" style="width:65%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-name">FlowUp<br>Titan</div>
+            <div class="product-specs">
+                Intel Core i9-14900K · RTX 4090<br>
+                64 Go DDR5 · 4 To NVMe
+            </div>
+            <div class="product-footer">
+                <div class="product-price">4 799 €<small>TTC</small></div>
+                <button class="product-add" title="Ajouter au panier">+</button>
+            </div>
+        </div>
+
+        <!-- Carte 4 -->
+        <div class="product-card" data-category="creation">
+            <div class="product-badge">✦ Création</div>
+            <div class="product-visual">
+                <div class="mini-pc" style="width:76px; height:136px;">
+                    <div class="mini-fan" style="width:40px; height:40px;">
+                        <div class="mini-fan-dot" style="width:9px; height:9px;"></div>
+                    </div>
+                    <div class="mini-bars" style="width:56px;">
+                        <div class="mini-bar g"></div>
+                        <div class="mini-bar"></div>
+                        <div class="mini-bar" style="width:80%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-name">FlowUp<br>Studio</div>
+            <div class="product-specs">
+                AMD Ryzen 9 7950X · RX 7900 XTX<br>
+                64 Go DDR5 · 2 To NVMe
+            </div>
+            <div class="product-footer">
+                <div class="product-price">3 499 €<small>TTC</small></div>
+                <button class="product-add" title="Ajouter au panier">+</button>
+            </div>
+        </div>
+
+        <!-- Carte 5 -->
+        <div class="product-card" data-category="gaming">
+            <div class="product-badge">⚡ Rapide</div>
+            <div class="product-visual">
+                <div class="mini-pc" style="width:80px; height:142px;">
+                    <div class="mini-fan" style="width:42px; height:42px;">
+                        <div class="mini-fan-dot" style="width:9px; height:9px;"></div>
+                    </div>
+                    <div class="mini-bars" style="width:60px;">
+                        <div class="mini-bar g"></div>
+                        <div class="mini-bar g" style="width:80%"></div>
+                        <div class="mini-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-name">FlowUp<br>Velocity</div>
+            <div class="product-specs">
+                AMD Ryzen 7 7800X3D · RTX 4070<br>
+                32 Go DDR5 · 2 To NVMe
+            </div>
+            <div class="product-footer">
+                <div class="product-price">1 849 €<small>TTC</small></div>
+                <button class="product-add" title="Ajouter au panier">+</button>
+            </div>
+        </div>
+
+        <!-- Carte 6 -->
+        <div class="product-card" data-category="workstation">
+            <div class="product-badge">▲ Pro</div>
+            <div class="product-visual">
+                <div class="mini-pc" style="width:88px; height:158px;">
+                    <div class="mini-fan" style="width:46px; height:46px;">
+                        <div class="mini-fan-dot" style="width:10px; height:10px;"></div>
+                    </div>
+                    <div class="mini-fan" style="width:34px; height:34px; animation-delay:0.3s;">
+                        <div class="mini-fan-dot" style="width:8px; height:8px;"></div>
+                    </div>
+                    <div class="mini-bars" style="width:68px;">
+                        <div class="mini-bar g"></div>
+                        <div class="mini-bar g" style="width:60%"></div>
+                        <div class="mini-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-name">FlowUp<br>Nexus</div>
+            <div class="product-specs">
+                Intel Xeon W5-3435X · RTX A4000<br>
+                128 Go ECC · 8 To NVMe RAID
+            </div>
+            <div class="product-footer">
+                <div class="product-price">6 499 €<small>TTC</small></div>
+                <button class="product-add" title="Ajouter au panier">+</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== CONFIGURATEUR ===== -->
+<section class="configurateur reveal" id="configurateur">
+    <div>
+        <p class="config-eyebrow">Sur Mesure</p>
+        <h2 class="config-title">Construisez votre<br><em>machine idéale.</em></h2>
+        <p class="config-desc">
+            Notre configurateur vous guide composant par composant pour assembler un PC parfaitement adapté à vos besoins — jeu, création, bureautique ou serveur. Compatibilité vérifiée en temps réel.
+        </p>
+        <a href="#" class="btn-outline-light">Lancer le configurateur →</a>
+    </div>
+    <div>
+        <div class="config-steps">
+            <div class="config-step active">
+                <div class="step-icon">⚡</div>
+                <div class="step-info">
+                    <div class="step-name">Processeur</div>
+                    <div class="step-val">Intel Core i9-14900K · 24 cœurs / 32 threads</div>
+                </div>
+                <div class="step-price">+489 €</div>
+            </div>
+            <div class="config-step">
+                <div class="step-icon">🎮</div>
+                <div class="step-info">
+                    <div class="step-name">Carte graphique</div>
+                    <div class="step-val">NVIDIA GeForce RTX 4090 · 24 Go VRAM</div>
+                </div>
+                <div class="step-price">+1 799 €</div>
+            </div>
+            <div class="config-step">
+                <div class="step-icon">💾</div>
+                <div class="step-info">
+                    <div class="step-name">Mémoire vive</div>
+                    <div class="step-val">64 Go DDR5 6400 MHz · G.Skill Trident Z5</div>
+                </div>
+                <div class="step-price">+249 €</div>
+            </div>
+            <div class="config-step">
+                <div class="step-icon">📀</div>
+                <div class="step-info">
+                    <div class="step-name">Stockage principal</div>
+                    <div class="step-val">4 To NVMe Gen5 · Samsung 990 Pro</div>
+                </div>
+                <div class="step-price">+319 €</div>
+            </div>
+            <div class="config-step">
+                <div class="step-icon">❄️</div>
+                <div class="step-info">
+                    <div class="step-name">Refroidissement</div>
+                    <div class="step-val">AIO 360 mm · NZXT Kraken Elite</div>
+                </div>
+                <div class="step-price">+189 €</div>
+            </div>
+            <div class="config-step">
+                <div class="step-icon">🔌</div>
+                <div class="step-info">
+                    <div class="step-name">Alimentation</div>
+                    <div class="step-val">1000W 80+ Platinum · Corsair HX1000</div>
+                </div>
+                <div class="step-price">+149 €</div>
+            </div>
+        </div>
+        <div class="config-total">
+            <span class="total-label">Total estimé</span>
+            <span class="total-price">3 194 €</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features reveal">
+    <div class="features-header">
+        <p class="section-eyebrow" style="justify-content:center">Pourquoi FlowUp</p>
+        <h2 class="section-title">L'<em>excellence</em> à chaque étape</h2>
+    </div>
+    <div class="features-grid">
+        <div class="feature-item">
+            <div class="feature-icon">🔧</div>
+            <div class="feature-name">Assemblage artisanal</div>
+            <p class="feature-desc">Chaque PC est monté à la main par nos techniciens certifiés, avec un contrôle qualité rigoureux avant expédition.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-name">Garantie 3 ans</div>
+            <p class="feature-desc">Pièces et main d'œuvre incluses. En cas de panne, nous intervenons sous 48h ou échangeons votre machine sans frais.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🚀</div>
+            <div class="feature-name">Livraison sécurisée</div>
+            <p class="feature-desc">Emballage renforcé anti-choc, assurance transport incluse, livraison suivie en 48h partout en France.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">💬</div>
+            <div class="feature-name">Support expert</div>
+            <p class="feature-desc">Une équipe de passionnés disponible 7j/7 par chat, e-mail ou téléphone pour vous accompagner avant et après l'achat.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials reveal">
+    <div class="testimonials-header">
+        <p class="section-eyebrow">Avis clients</p>
+        <h2 class="section-title">Ils ont fait <em>confiance</em> à FlowUp</h2>
+    </div>
+    <div class="testimonials-grid">
+        <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-text">« Commande reçue en 2 jours, parfaitement emballée. Le PC démarre au quart de tour, les performances sont bluffantes pour du gaming 4K. Je recommande sans hésiter. »</p>
+            <div class="testi-author">
+                <div class="testi-avatar">TM</div>
+                <div>
+                    <div class="testi-name">Thomas M.</div>
+                    <div class="testi-since">FlowUp Pro X · Marseille</div>
+                </div>
+            </div>
+        </div>
+        <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-text">« Le configurateur est vraiment intuitif. L'équipe a pris le temps de me conseiller pour le meilleur rapport qualité/prix selon mon usage créatif. Machine impeccable. »</p>
+            <div class="testi-author">
+                <div class="testi-avatar">SL</div>
+                <div>
+                    <div class="testi-name">Sophie L.</div>
+                    <div class="testi-since">Config sur mesure · Lyon</div>
+                </div>
+            </div>
+        </div>
+        <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-text">« Troisième PC acheté chez FlowUp. La qualité est constante, le SAV réactif. Mon studio tourne entièrement sur leurs machines. Une valeur sûre dans le milieu. »</p>
+            <div class="testi-author">
+                <div class="testi-avatar">RA</div>
+                <div>
+                    <div class="testi-name">Romain A.</div>
+                    <div class="testi-since">FlowUp Nexus · Paris</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="newsletter reveal">
+    <h2 class="newsletter-title">Restez dans la <em>boucle.</em></h2>
+    <p class="newsletter-desc">Nouvelles configurations, promotions exclusives et conseils tech — directement dans votre boîte mail.</p>
+    <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="votre@email.com" />
+        <button class="newsletter-btn">S'abonner</button>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-top">
+        <div class="footer-brand">
+            <p>Flow<span>Up</span></p>
+            <small>PC premium assemblés avec soin, conçus pour durer. Votre performance, notre passion.</small>
+        </div>
+        <div class="footer-col">
+            <h4>Produits</h4>
+            <ul>
+                <li><a href="#">Configurations Gaming</a></li>
+                <li><a href="#">Configurations Création</a></li>
+                <li><a href="#">Workstations</a></li>
+                <li><a href="#">Configurateur</a></li>
+                <li><a href="#">Composants</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Infos</h4>
+            <ul>
+                <li><a href="#">À propos</a></li>
+                <li><a href="#">Blog Tech</a></li>
+                <li><a href="#">Carrières</a></li>
+                <li><a href="#">Presse</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Garantie</a></li>
+                <li><a href="#">Livraison</a></li>
+                <li><a href="#">Retours</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 FlowUp SAS · Mentions légales · CGV · Politique de confidentialité</p>
+        <div class="footer-socials">
+            <a href="#" class="social-link" title="Twitter / X">✕</a>
+            <a href="#" class="social-link" title="Instagram">▣</a>
+            <a href="#" class="social-link" title="YouTube">▶</a>
+            <a href="#" class="social-link" title="Discord">◈</a>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    /* --- Nav scroll effect --- */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    /* --- Scroll reveal --- */
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    /* --- Product filters --- */
+    function filterProducts(e, category) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            const match = category === 'tous' || card.dataset.category === category;
+            card.style.display = match ? 'flex' : 'none';
+        });
+    }
+
+    /* --- Add to cart feedback --- */
+    document.querySelectorAll('.product-add').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const orig = btn.textContent;
+            btn.textContent = '✓';
+            btn.style.background = 'var(--gold)';
+            btn.style.borderColor = 'var(--gold)';
+            btn.style.color = 'var(--black)';
+            setTimeout(() => {
+                btn.textContent = orig;
+                btn.style.background = '';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+            }, 1200);
+        });
+    });
+
+    /* --- Config step selection --- */
+    document.querySelectorAll('.config-step').forEach(step => {
+        step.addEventListener('click', () => {
+            document.querySelectorAll('.config-step').forEach(s => s.classList.remove('active'));
+            step.classList.add('active');
+        });
+    });
+
+    /* --- Newsletter form --- */
+    const newsletterBtn = document.querySelector('.newsletter-btn');
+    const newsletterInput = document.querySelector('.newsletter-input');
+    newsletterBtn.addEventListener('click', () => {
+        if (newsletterInput.value.includes('@')) {
+            newsletterBtn.textContent = 'Merci !';
+            newsletterBtn.style.background = 'var(--gold-light)';
+            newsletterInput.value = '';
+            setTimeout(() => {
+                newsletterBtn.textContent = "S'abonner";
+                newsletterBtn.style.background = '';
+            }, 2500);
+        } else {
+            newsletterInput.style.borderColor = 'rgba(220,80,80,0.5)';
+            setTimeout(() => { newsletterInput.style.borderColor = ''; }, 1500);
+        }
+    });
+</script>
+</body>
+</html>
