@@ -1,5 +1,4 @@
 <?php
-global $pdo;
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php?page=connexion');

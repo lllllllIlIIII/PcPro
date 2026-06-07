@@ -1,7 +1,5 @@
 <?php
 
-global $pdo;
-
 $catalogueDAO = new catalogueDAO($pdo);
 
 $catalogue = $catalogueDAO->getAllcatalogue();

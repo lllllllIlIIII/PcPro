@@ -1,5 +1,4 @@
 <?php
-global $pdo;
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "<div class='container mt-5'><div class='alert alert-danger'>Aucun PC sélectionné.</div></div>";

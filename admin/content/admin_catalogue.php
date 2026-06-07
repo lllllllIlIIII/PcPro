@@ -1,5 +1,4 @@
 <?php
-global $pdo;
 
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     echo "<div class='container mt-5'><div class='alert tech-alert-danger'>Accès réservé aux administrateurs.</div></div>";

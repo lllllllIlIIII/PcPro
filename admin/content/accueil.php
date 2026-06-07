@@ -1,9 +1,7 @@
 <?php
-global $pdo;
 $catalogueDAO = new CatalogueDAO($pdo);
 
 $toutLeCatalogue = $catalogueDAO->getAllcatalogue();
-
 
 $topsVentes = array_slice($toutLeCatalogue, 0, 3);
 ?>

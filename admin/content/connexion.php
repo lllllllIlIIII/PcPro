@@ -1,5 +1,4 @@
 <?php
-global $pdo;
 
 $userDAO = new UserDAO($pdo);
 $erreur = '';

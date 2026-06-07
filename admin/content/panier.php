@@ -1,5 +1,4 @@
 <?php
-global $pdo;
 
 if (!isset($_SESSION['panier'])) { $_SESSION['panier'] = []; }
 if (!isset($_SESSION['panier_custom'])) { $_SESSION['panier_custom'] = []; }

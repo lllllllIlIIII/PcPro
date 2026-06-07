@@ -1,6 +1,4 @@
 <?php
-global $pdo;
-
 if (!isset($_SESSION['user_id'])) {
     echo "<div class='container mt-5 d-flex justify-content-center'>";
     echo "<div class='card p-5 shadow-lg text-center restricted-card w-100'>";
