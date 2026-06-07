@@ -266,7 +266,3 @@ usort($historique_global, fn($a, $b) => strtotime($b['date']) - strtotime($a['da
     </div>
 
 </div>
-
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="admin/assets/js/admin_ajax.js"></script>
-<script src="admin/assets/js/admin_filtre.js"></script>
